@@ -1,4 +1,4 @@
-// Class Inheritance, Polymorphism ( Dynamic Polymorphism ) and Encapsulation have been used in this Program. 
+// Class Inheritance, Polymorphism ( Dynamic Polymorphism ), Abstraction and Encapsulation have been used in this Program. 
 using System;
 namespace MyNamespace
 {
@@ -17,65 +17,61 @@ namespace MyNamespace
             Console.WriteLine("If your HR Press '3' on Keyboard"); // For user info
             Console.WriteLine();
             bool check = true; // Defining variable.
-            while (check) // While Loop will check whether correct number has been pressed or not
+            while (true) // While loop for multiple Use.
             {
-                try
+                while (check) // While Loop will check whether correct number has been pressed or not
                 {
-                    Console.Write("Kindly Tell us your Designation by pressing corresponding number: ");
-                    int a = Convert.ToInt32(Console.ReadLine());
-                    if (a == 1)
+                    try
                     {
-                        SalarySlip s = new EngineerSalary(); // Creating EngineerSalary object.
-                        Console.WriteLine(s.GetSalary());
-                        Console.ReadLine();
-                        break; // Terminate the Loop.
-                    }
-                    if (a == 2)
-                    {
-                        SalarySlip s = new ManagerSalary(); // Creating ManagerSalary object.
-                        Console.WriteLine(s.GetSalary());
-                        Console.ReadLine();
-                        break; // Terminate the Loop.
-                    }
-                    if (a == 3)
-                    {
-                        SalarySlip s = new HrSalary();    // Creating HrSalary object.
-                        Console.WriteLine(s.GetSalary());
-                        Console.ReadLine();
-                        break; // Terminate the Loop.
-                    }
-                    if (a != 1 && a != 2 && a != 3)
-                    {
-                        Console.WriteLine("Enter valid number PLEASE");
-                    }
+                        Console.Write("Kindly Tell us your Designation by pressing corresponding number And Click 4 for exit: ");
+                        int a = Convert.ToInt32(Console.ReadLine());
+                        if (a == 1)
+                        {
+                            SalarySlip engineer = new EngineerSalary(); // Creating EngineerSalary object.
+                            Console.WriteLine(engineer.GetSalary());
+                            //Console.ReadLine();
+                            break; // Terminate the Loop.
+                        }
+                        if (a == 2)
+                        {
+                            SalarySlip manager = new ManagerSalary(); // Creating ManagerSalary object.
+                            Console.WriteLine(manager.GetSalary());
+                            //Console.ReadLine();
+                            break; // Terminate the Loop.
+                        }
+                        if (a == 3)
+                        {
+                            SalarySlip hr = new HrSalary();    // Creating HrSalary object.
+                            Console.WriteLine(hr.GetSalary());
+                            //Console.ReadLine();
+                            break; // Terminate the Loop.
+                        }
+                        if (a != 1 && a != 2 && a != 3 && a != 4)
+                        {
+                            Console.WriteLine("Enter valid number PLEASE");
+                        }
+                        if (a == 4)
+                        {
+                            Console.WriteLine("Software has been closed Successfully!!!");
+                            check = false;
 
-                }
-                catch (System.Exception ) // It will handle error. if string is entered
-                {
-                    Console.WriteLine("You are either entering character, Special Character or string. Kindly Enter 1 0r 2 0r 3 number.");
-                    
-                    
-                    
-                    
-                }
-                
+                        }
+                        //break; // Terminating First While loop to exit 
 
+                    }
+                    catch (System.Exception) // It will handle error. if string is entered
+                    {
+                        Console.WriteLine("You are either entering character, Special Character or string. Kindly Enter 1 0r 2 0r 3 number.");
+                    }
+                }
             }
-            
-            
-
-            
         }
     }
-    public class SalarySlip // Parent Class or Base Class.
+ abstract public class SalarySlip // Parent Class or Base Class.
     {
         public int baseSalary = 1500*12; // Making it for annual
-        public virtual string GetSalary() // Virtual Method
-        {
-            return "Salaries";
-            
-
-        }
+        abstract public string GetSalary(); // Virtual Method
+      
     }
     public class EngineerSalary : SalarySlip  // Child Class ( Class inheritance).
     {
@@ -97,7 +93,7 @@ namespace MyNamespace
             int Gsalary = baseSalary+ fuel + medical;
             int taxDeduct = Gsalary * 17/100;
             int netSalary = Gsalary - taxDeduct;
-            return " The Annual Gross salary of Manager is " + Gsalary + " and Annual Net Salary is netSalary " + netSalary; // Result
+            return " The Annual Gross salary of Manager is $" + Gsalary + " and Annual Net Salary is netSalary $" + netSalary; // Result
             
             
         }
